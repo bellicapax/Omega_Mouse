@@ -22,7 +22,7 @@ class OmegaMouseFullOverrides:
     # Phase 2: Pop sound left clicks > turns off Head tracking > global variable set False >
     #          Removes tag to enable first click again.
     # While Dragging: Popping only moves the cursor to gaze. Does not click.
-    def noise_trigger_pop():
+    def omega_mouse_begin():
         """If no drag, first pop toggles head tracking, second pop confirms click.
         If drag, popping only moves the cursor to gaze."""
         gaze_window = Omega_Mouse.setting_gaze_capture_interval.get()

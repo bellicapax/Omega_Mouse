@@ -13,7 +13,7 @@ and tag: user.omega_lite
 @ctx_lite.action_class('user')
 class OmegaMouseLiteOverrides:
 
-    def noise_trigger_pop():
+    def omega_mouse_begin():
         """Move cursor to gaze then switch to head tracking."""
         gaze_window = setting_gaze_capture_interval.get()
         head_lag = setting_head_track_lag.get()

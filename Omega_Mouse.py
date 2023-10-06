@@ -29,7 +29,7 @@ setting_omega_mouse_mode = mod.setting(
 setting_gaze_capture_interval = mod.setting(
     "gaze_capture_interval",
     type=str,
-    default="50ms",
+    default="100ms",
     desc="Sets gaze time window for cursor movement after 'popping noise'/'relo' commands"
     )
 
@@ -62,6 +62,7 @@ class OmegaMouseActions:
         if om_state == False:
             om_state = True
             omega_mode = setting_omega_mouse_mode.get()
+            actions.user.hud_add_log('success', 'Omega Active')
             if omega_mode == 0:
                 actions.tracking.control_toggle(True)
                 actions.tracking.control_gaze_toggle(False)
@@ -86,6 +87,7 @@ class OmegaMouseActions:
                 print(f"Basic mode. First pop = {first_pop_done}. tags = {list(ctx.tags)}")
         else:
             om_state = False
+            actions.user.hud_add_log('error', 'Omega Bye-Bye')
             actions.tracking.control_toggle(False)
             actions.tracking.control_gaze_toggle(True)
             actions.tracking.control_head_toggle(True)
@@ -125,6 +127,9 @@ class OmegaMouseActions:
                 print(f"Basic Mode. First pop = {first_pop_done}. tags = {list(ctx.tags)}")                
         else:
             pass
+    
+    def omega_mouse_begin():
+        """Placeholder function to be defined in modes"""
     
     def omega_mouse_left_click():
         """Normal Left Click when Omega Mouse is off"""
