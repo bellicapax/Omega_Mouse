@@ -29,7 +29,7 @@ setting_omega_mouse_mode = mod.setting(
 setting_gaze_capture_interval = mod.setting(
     "gaze_capture_interval",
     type=str,
-    default="100ms",
+    default="1000ms",
     desc="Sets gaze time window for cursor movement after 'popping noise'/'relo' commands"
     )
 
