@@ -1,4 +1,4 @@
-from talon import Module, Context, actions, ctrl
+from talon import Module, Context, actions, ctrl, app
 
 mod = Module()
 mod.tag("om_on", desc="Signals Omega Mouse is toggled on")
@@ -39,6 +39,14 @@ setting_head_track_lag = mod.setting(
     default="50ms",
     desc="Sets interval after gaze tracking before head tracking starts"
     )
+
+def on_ready():
+    # global om_state
+    # om_state = True
+    # actions.user.omega_mouse_restart()
+    actions.user.omega_mouse_toggle()
+
+app.register("ready", on_ready)
 
 # ========== NON-CALLABLE FUNCTIONS ==========
 # Releases all modifier keys (Mac users need to replace "alt:up" with "cmd:up")
@@ -100,7 +108,7 @@ class OmegaMouseActions:
         """Resets Omega Mouse to initial state. Re-checks mode value."""
         global om_state
         global first_pop_done
-        
+        actions.user.hud_add_log('success', 'Omega Restart')
         if om_state == True:
             omega_mode = setting_omega_mouse_mode.get()
             if omega_mode == 0:
