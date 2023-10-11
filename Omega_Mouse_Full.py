@@ -41,8 +41,7 @@ class OmegaMouseFullOverrides:
             # Phase 2: Left click and disable head tracking
             elif Omega_Mouse.first_pop_done == True:
                 actions.mouse_click(0)
-                actions.tracking.control_gaze_toggle(False)
-                actions.tracking.control_head_toggle(False)
+                toggle_gaze_and_head_tracking(False)
                 Omega_Mouse.first_pop_done = False
         # If drag is active, Phase 2 pop does "mouse_drag_end" instead of simple left click
         else:
@@ -56,8 +55,7 @@ class OmegaMouseFullOverrides:
                 Omega_Mouse.first_pop_done = True
             # Second pop does "mouse_drag_end" in ctx_full below
             elif Omega_Mouse.first_pop_done == True:
-                actions.tracking.control_gaze_toggle(False)
-                actions.tracking.control_head_toggle(False)
+                toggle_gaze_and_head_tracking(False)
                 Omega_Mouse.first_pop_done = False
                 # stealing "drag end" code from mouse_drag_end function in mouse.py file
                 buttons_held_down = list(ctrl.mouse_buttons_down())
@@ -81,13 +79,11 @@ class OmegaMouseFullOverrides:
                 actions.mouse_click(0)
             elif Omega_Mouse.first_pop_done == True:
                 actions.mouse_click(0)
-                actions.tracking.control_gaze_toggle(False)
-                actions.tracking.control_head_toggle(False)
+                toggle_gaze_and_head_tracking(False)
                 Omega_Mouse.first_pop_done = False
         # If drag is active, do mouse_drag_end instead
         else:
-            actions.tracking.control_gaze_toggle(False)
-            actions.tracking.control_head_toggle(False)
+            toggle_gaze_and_head_tracking(False)
             Omega_Mouse.first_pop_done = False
             # stealing "drag end" code from mouse_drag_end function in mouse.py file
             buttons_held_down = list(ctrl.mouse_buttons_down())
@@ -105,21 +101,16 @@ class OmegaMouseFullOverrides:
             Omega_Mouse.omega_mouse_modifiers_release_function()
         elif Omega_Mouse.first_pop_done == True:
             actions.mouse_click(0)
-            actions.tracking.control_gaze_toggle(False)
-            actions.tracking.control_head_toggle(False)
+            toggle_gaze_and_head_tracking(False)
             Omega_Mouse.first_pop_done = False
             Omega_Mouse.omega_mouse_modifiers_release_function()
 
     def omega_mouse_double_click():
         """Double Click that turns off tracking if needed."""
-        if Omega_Mouse.first_pop_done == False:
-            actions.mouse_click(0)
-            actions.mouse_click(0)
-        elif Omega_Mouse.first_pop_done == True:
-            actions.mouse_click(0)
-            actions.mouse_click(0)
-            actions.tracking.control_gaze_toggle(False)
-            actions.tracking.control_head_toggle(False)
+        actions.mouse_click(0)
+        actions.mouse_click(0)
+        if Omega_Mouse.first_pop_done == True:
+            toggle_gaze_and_head_tracking(False)
             Omega_Mouse.first_pop_done = False
     
     def omega_mouse_relocate():
@@ -142,8 +133,7 @@ class OmegaMouseFullOverrides:
         if Omega_Mouse.first_pop_done == False:
             pass
         elif Omega_Mouse.first_pop_done == True:
-            actions.tracking.control_gaze_toggle(False)
-            actions.tracking.control_head_toggle(False)
+            toggle_gaze_and_head_tracking(False)
             Omega_Mouse.first_pop_done = False
     
     # Changes default mouse_drag behavior while Omega Mouse is active to appropriate behavior.
@@ -166,16 +156,14 @@ class OmegaMouseFullOverrides:
                 ctrl.mouse_click(button=button, up=True)
             ctrl.mouse_click(button=button, down=True)
             #-----------------------------------------
-            actions.tracking.control_gaze_toggle(False)
-            actions.tracking.control_head_toggle(False)
+            toggle_gaze_and_head_tracking(False)
             Omega_Mouse.first_pop_done = False
     
     # Changes default mouse_drag_end behavior while Omega Mouse is active to appropriate
     # behavior. Completes Phase 2, releases mouse buttons and modifier keys.
     def mouse_drag_end():
         """Completes Phase 2, releases mouse buttons/modifier keys"""
-        actions.tracking.control_gaze_toggle(False)
-        actions.tracking.control_head_toggle(False)
+        toggle_gaze_and_head_tracking(False)
         Omega_Mouse.first_pop_done = False
         # stealing "drag end" code from mouse_drag_end function in mouse.py file
         buttons_held_down = list(ctrl.mouse_buttons_down())
@@ -185,3 +173,6 @@ class OmegaMouseFullOverrides:
         actions.sleep("50ms")
         Omega_Mouse.omega_mouse_modifiers_release_function()
     
+def toggle_gaze_and_head_tracking(enable: bool):
+    actions.tracking.control_gaze_toggle(enable)
+    actions.tracking.control_head_toggle(enable)
