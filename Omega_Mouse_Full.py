@@ -105,10 +105,10 @@ class OmegaMouseFullOverrides:
             Omega_Mouse.first_pop_done = False
             Omega_Mouse.omega_mouse_modifiers_release_function()
 
-    def omega_mouse_double_click():
+    def omega_mouse_multi_click(num_clicks: int):
         """Double Click that turns off tracking if needed."""
-        actions.mouse_click(0)
-        actions.mouse_click(0)
+        for _ in range(num_clicks):
+            actions.mouse_click(0)
         if Omega_Mouse.first_pop_done == True:
             toggle_gaze_and_head_tracking(False)
             Omega_Mouse.first_pop_done = False

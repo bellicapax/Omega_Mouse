@@ -34,7 +34,8 @@ omega restart: user.omega_mouse_restart()
 #*Popping Noise*: {overrides default pop click for Omega Mouse functionality}
 (yum | gum): user.omega_mouse_left_click()
 (yummer | gummer): user.omega_mouse_left_modup_click()
-twill: user.omega_mouse_double_click()
+^duke$: user.omega_mouse_multi_click(2)
+^duchess$: user.omega_mouse_multi_click(3)
 relo: user.omega_mouse_relocate()
 #drag: {overrides default mouse_drag in mouse.py for Omega Mouse functionality}
 drop: user.mouse_drag_end()

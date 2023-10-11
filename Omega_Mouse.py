@@ -148,10 +148,10 @@ class OmegaMouseActions:
         actions.mouse_click(0)
         omega_mouse_modifiers_release_function()
     
-    def omega_mouse_double_click():
+    def omega_mouse_multi_click(num_clicks: int):
         """Normal Double Click when Omega Mouse is off"""
-        actions.mouse_click(0)
-        actions.mouse_click(0)
+        for _ in range(num_clicks):
+            actions.mouse_click(0)
     
     def omega_mouse_relocate():
         """Does nothing when Omega Mouse is off"""

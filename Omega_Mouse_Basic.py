@@ -50,10 +50,10 @@ class OmegaMouseBasicOverrides:
         actions.tracking.control_head_toggle(True)
         omega_mouse_modifiers_release_function()
     
-    def omega_mouse_double_click():
+    def omega_mouse_multi_click(num_clicks: int):
         """Double Click then keep head tracking on"""
-        actions.mouse_click(0)
-        actions.mouse_click(0)
+        for _ in range(num_clicks):
+            actions.mouse_click(0)
         actions.tracking.control_gaze_toggle(False)
         actions.tracking.control_head_toggle(True)
         
