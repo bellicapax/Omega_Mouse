@@ -26,7 +26,7 @@ settings():
 
 # ----- Omega Mouse Toggle Switching -----
 omega mouse: user.omega_mouse_toggle()
-omega restart: user.omega_mouse_restart()
+no mega: user.omega_mouse_restart()
 #control mouse: {uses Omega Mouse function placed into mouse.talon. See "Set-Up" in readme.}
 #zoom mouse: {uses Omega Mouse function placed into mouse.talon. See "Set-Up" in readme.}
 
@@ -36,7 +36,7 @@ omega restart: user.omega_mouse_restart()
 (yummer | gummer): user.omega_mouse_left_modup_click()
 ^duke$: user.omega_mouse_multi_click(2)
 ^duchess$: user.omega_mouse_multi_click(3)
-relo: user.omega_mouse_relocate()
+# relo: user.omega_mouse_relocate()
 #drag: {overrides default mouse_drag in mouse.py for Omega Mouse functionality}
 drop: user.mouse_drag_end()
 #(drag end | end drag | drop): {overrides default mouse_drag_end in mouse.py for Omega Mouse functionality}
